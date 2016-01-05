@@ -4,23 +4,43 @@ body{
 }
 
 .navbar.navbar-inverse{
-	background: linear-gradient(135deg, #c77251 0%, #85462d 100%);
-	background-color: linear-gradient(135deg, #c77251 0%, #85462d 100%);
+	background: #1ABC9C;
+	background-color: #1ABC9C;
 	box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
-	border-color:#909090;
+	border-color:#1ABC9C;
 }
 
 .main{
-	background: linear-gradient(135deg, #c77251 0%, #85462d 100%);
+	background:#1ABC9C;
 }
 
 .main-block{
-	background-color: #fff;
+	background-color: #ECEFF1;
 	box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
 }
 .main-block h1,h2,h3{
-	color: #5E5E5E;
+	color: #1ABC9C;
 }
+
+.sign-icon > img{
+	display: block;
+	margin-bottom: 12px;
+	width: 80%;
+}
+
+form:before {
+  content: "";
+  border-style: solid;
+  border-width: 12px 12px 12px 0;
+  border-color: transparent #eceff1 transparent transparent;
+  height: 0px;
+  position: absolute;
+  left: 3px;
+  top: 35px;
+  width: 0;
+  -webkit-transform: rotate(360deg);
+}
+
 
 .text-center{
 	display: block;
@@ -28,37 +48,45 @@ body{
 	margin-right: auto;
 }
 
-.main h1{
-	color: #fff;
+.green{
+	color:#1ABC9C;
 }
-.main h3{
-	color: #fff;
+.white{
+	color:#fff;
 }
+a.grey{
+	color:#a1a4a7;
+}
+a.grey:hover{
+	color:#1ABC9C;
+}
+
+
 .main-btn{
 	color: #fff;
-	background: #C05B2F;
+	background: #1ABC9C;
 	box-shadow: 2px 3px 1px  rgba(0, 0, 0, 0.2);
 }
 
 
 .btn.btn-primary{
-	background: #C05B2F;
+	background: #1ABC9C;
 	border-color:#fff;
 }
 
 .btn.btn-success{
-	background: #CF7654;
+	background: #1ABC9C;
 	border-color:#fff;
 }
 .btn.btn-info{
-	color:#CF7654;
-	background: #fff;
-	border-color:#fff;
+	color:#1ABC9C;
+	background: #ECEFF1;
+	border-color:#ECEFF1;
 	box-shadow: 2px 3px 1px  rgba(0, 0, 0, 0.2);
 }
 
 .navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus{
-	background-color: #965136;
+	background-color: #1ABC9C;
 }
 
 tr>.working{
@@ -68,13 +96,15 @@ tr>.finished{
 	color:#86472E;
 }
 footer{
-	background: #eaeaea;
-	box-shadow: 10px 15px 0px 0px rgba(0, 0, 0, 0.2);
+	background: #ECEFF1;
 }
 .footer-content ul li{
 	display: inline-block;
 	margin: 0 50px;
 }
-.footer-content a{
-	color: #777777;
+footer a{
+	color: #a1a4a7;
+}
+footer a:hover{
+	color:#1ABC9C;
 }

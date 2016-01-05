@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}
+
+    {% endblock title %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
+</head>
+<body>
+
+
+<div class="main" >
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1">
+                <a href="/home" class="btn btn-info">
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                </a>
+            </div>
+            <div class="col-sm-1 col-sm-offset-10">
+            {% block sign-block %}
+
+            {% endblock sign-block %}
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3">
+            {% block form-block %}
+
+            {% endblock form-block %}
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/>
+</div>
+
+    <footer>
+    <br/><br/><br/>
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="text-center">
+                    <div class="footer-content">
+                        <ul>
+                            <li><a href="">友情链接</a></li>
+                            <li><a href="">联系我们</a></li>
+                            <li><a href="">关于我们</a></li>
+                        </ul>
+                        &nbsp;&nbsp;
+                        </div>
+                    <p>
+                        <a class='a-green' href="http://blog.mymusise.com">Power By Mymusise</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <br/>
+    </footer>
+</body>
+<script src="/static/js/jquery-2.1.1.min.js" charset="utf-8"></script>
+<script src="/static/js/core.js" charset="utf-8"></script>
+</html>
