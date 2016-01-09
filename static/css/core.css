@@ -28,7 +28,7 @@ body{
 	width: 80%;
 }
 
-form:before {
+.sign-form:before {
   content: "";
   border-style: solid;
   border-width: 12px 12px 12px 0;

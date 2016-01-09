@@ -1,9 +1,9 @@
 var personal = $("#userInfo");
 var phone    = $.cookie('phone')
 
-if ($.cookie('token')!='') {
-	console.log($.cookie('token'))
-		personal.html("<a href='/rentCompany/userInfo/'>"+phone+"</a>");
+if ($.cookie('token')!=undefined) {
+	console.log($.cookie('token'));
+	personal.html("<a href='/account/userInfo/'>"+phone+"</a>");
 }
 
 var pageApps 	= location.pathname.split('/');

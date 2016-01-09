@@ -5,12 +5,15 @@ class User(models.Model):
     username            = models.CharField(max_length=32)
     email               = models.CharField(max_length=16)
     sex                 = models.IntegerField(default=0)
+    password_salt       = models.CharField(max_length=16)
+    password_encryption = models.CharField(max_length=64)
+    is_email_verified   = models.BooleanField(default=False)
+    is_phone_verified   = models.BooleanField(default=False)
+    is_user_enable      = models.BooleanField(default=True)
+    email_verification_code = models.CharField(max_length=32)
+    phone_verification_code = models.CharField(max_length=32)
+    reset_password_code = models.CharField(max_length=32)
     create_at           = models.DateTimeField(default=timezone.now)
-
-class EmailVerification(models.Model):
-    Email_number            = models.CharField(max_length=16)
-    Email_verification_code = models.CharField(max_length=6)
-    create_at               = models.DateTimeField(default=timezone.now)
 
 class LoginHistory(models.Model):
     uid                 = models.ForeignKey(User)
