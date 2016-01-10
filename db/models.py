@@ -10,10 +10,19 @@ class User(models.Model):
     is_email_verified   = models.BooleanField(default=False)
     is_phone_verified   = models.BooleanField(default=False)
     is_user_enable      = models.BooleanField(default=True)
-    email_verification_code = models.CharField(max_length=32)
-    phone_verification_code = models.CharField(max_length=32)
     reset_password_code = models.CharField(max_length=32)
     create_at           = models.DateTimeField(default=timezone.now)
+
+class EmailVerification(models.Model):
+    uid                     = models.ForeignKey(User)
+    email_verification_code = models.CharField(max_length=32)
+    create_at               = models.DateTimeField(default=timezone.now)
+
+class PhoneVerification(models.Model):
+    uid                     = models.ForeignKey(User)
+    phone_verification_code = models.CharField(max_length=32)
+    create_at               = models.DateTimeField(default=timezone.now)
+
 
 class LoginHistory(models.Model):
     uid                 = models.ForeignKey(User)

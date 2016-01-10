@@ -1,7 +1,9 @@
 from django.contrib.auth.hashers import (make_password,check_password)
 from django.utils.crypto import get_random_string
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from db.models import *
 from datetime import datetime
 # Create your views here.
@@ -68,11 +70,27 @@ def SignUp(req):
             newUser.email               = form['email']
             newUser.password_salt       = get_random_string(16)
             newUser.password_encryption = make_password(form['password'],salt=newUser.password_salt)
-            newUser.email_verification_code = get_random_string(32)
             newUser.save()
+            emailVerify         = EmailVerification()
+            emailVerify.uid     = newUser
+            emailVerify.email_verification_code = get_random_string(32)
+            emailVerify.save()
             return HttpResponseRedirect('/account/sign-in')
         else:
             return render(req,'account/sign-up.html',{"form":form})
+
+def EmailVerify(req,emailVerifyCode):
+    verifications = EmailVerification.objects.filter(email_verification_code=emailVerifyCode)
+    if verifications:
+        verification = verifications.first()
+        user = verification.uid
+        user.is_email_verified = True
+        user.save()
+        verification.delete()
+        return HttpResponse('Verify Success!')
+    else:
+        return HttpResponse('Verify Error!')
+
 
 def ResetPassword(req):
     if req.method == "GET":

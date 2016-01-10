@@ -12,6 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='EmailVerification',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('email_verification_code', models.CharField(max_length=32)),
+                ('create_at', models.DateTimeField(default=django.utils.timezone.now)),
+            ],
+        ),
+        migrations.CreateModel(
             name='LoginHistory',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -19,6 +27,14 @@ class Migration(migrations.Migration):
                 ('ip', models.CharField(max_length=64)),
                 ('device', models.CharField(max_length=64)),
                 ('time_out', models.DateTimeField(max_length=64)),
+                ('create_at', models.DateTimeField(default=django.utils.timezone.now)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='PhoneVerification',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('phone_verification_code', models.CharField(max_length=32)),
                 ('create_at', models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
@@ -34,14 +50,22 @@ class Migration(migrations.Migration):
                 ('is_email_verified', models.BooleanField(default=False)),
                 ('is_phone_verified', models.BooleanField(default=False)),
                 ('is_user_enable', models.BooleanField(default=True)),
-                ('email_verification_code', models.CharField(max_length=32)),
-                ('phone_verification_code', models.CharField(max_length=32)),
                 ('reset_password_code', models.CharField(max_length=32)),
                 ('create_at', models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
         migrations.AddField(
+            model_name='phoneverification',
+            name='uid',
+            field=models.ForeignKey(to='db.User'),
+        ),
+        migrations.AddField(
             model_name='loginhistory',
+            name='uid',
+            field=models.ForeignKey(to='db.User'),
+        ),
+        migrations.AddField(
+            model_name='emailverification',
             name='uid',
             field=models.ForeignKey(to='db.User'),
         ),

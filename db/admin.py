@@ -6,6 +6,14 @@ from .models import *
 class User(admin.ModelAdmin):
     pass
 
+@admin.register(EmailVerification)
+class EmailVerification(admin.ModelAdmin):
+    pass
+
+@admin.register(PhoneVerification)
+class PhoneVerification(admin.ModelAdmin):
+    pass
+
 @admin.register(LoginHistory)
 class LoginHistory(admin.ModelAdmin):
     pass
