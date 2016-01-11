@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+HOST = 'localhost:8000'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -84,11 +86,11 @@ DATABASES = {
 }
 
 # mail setting
-EMAIL_HOST = 'smtp.163.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'server_ping@163.com'
-EMAIL_HOST_PASSWORD = 'pingserver'
-EMAIL_SUBJECT_PREFIX = u'[mymusise]'
+EMAIL_HOST = ''
+EMAIL_PORT = 
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_SUBJECT_PREFIX = ''
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = '604072107@qq.com'

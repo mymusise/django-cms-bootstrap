@@ -1,11 +1,11 @@
 from django.contrib.auth.hashers import (make_password,check_password)
 from django.utils.crypto import get_random_string
-from django.core.mail import send_mail
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from db.models import *
 from datetime import datetime
+from . import sign
 # Create your views here.
 
 def SignIn(req):
@@ -13,14 +13,8 @@ def SignIn(req):
         return render(req,'account/sign-in.html')
     elif req.method == "POST":
         message = ""
-        form = {
-                'username'      : req.POST.get('username'),
-                'password'      : req.POST.get('password'),
-            }
-        if not form['username']:
-            message = 'Please Enter Your Username!'
-        elif not form['password']:
-            message = 'Please Enter Your Password!'
+        form = sign.GetFormDate(req,['username','password'])
+        message = sign.SignInFormCheck(form)
         if message :
             return render(req,'account/sign-in.html',{"form":form,'message':message})
 
@@ -48,20 +42,8 @@ def SignUp(req):
         return render(req,'account/sign-up.html')
     elif req.method == "POST":
         message = ""
-        form = {
-                'username'      : req.POST.get('username'),
-                'email'         : req.POST.get('email'),
-                'password'      : req.POST.get('password'),
-                'passwordAgain' : req.POST.get('passwordAgain'),
-            }
-        if not form['username']:
-            message = 'Please Enter A Username!'
-        elif not form['email']:
-            message = 'Please enter your Email!'
-        elif not form['password']:
-            message = 'Please enter your Password!'
-        elif form['password'] != form['passwordAgain']:
-            message = 'Please enter the same Password!'
+        form = sign.GetFormDate(req,['username','email','password','passwordAgain'])
+        message = sign.SignUpFormCheck(form)
         if message:
             return render(req,'account/sign-up.html',{"form":form,'message':message})
         if req.POST.get('username') and req.POST.get('email') and req.POST.get('password') and req.POST.get('passwordAgain'):
@@ -75,6 +57,8 @@ def SignUp(req):
             emailVerify.uid     = newUser
             emailVerify.email_verification_code = get_random_string(32)
             emailVerify.save()
+            
+            sign.SentSignUpMail(emailVerify,newUser)
             return HttpResponseRedirect('/account/sign-in')
         else:
             return render(req,'account/sign-up.html',{"form":form})
@@ -95,6 +79,8 @@ def EmailVerify(req,emailVerifyCode):
 def ResetPassword(req):
     if req.method == "GET":
         return render(req,'account/reset-password.html')
+    if req.method == "POST":
+        pass
 
 def ForgetPassword(req):
     if req.method == "GET":
