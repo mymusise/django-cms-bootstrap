@@ -6,17 +6,14 @@ from django.http import HttpResponse
 from db.models import *
 from datetime import datetime
 from . import sign
-# Create your views here.
 
+@sign.check_parameters("POST",'account/sign-in.html','username','password')
 def SignIn(req):
     if req.method == "GET":
         return render(req,'account/sign-in.html')
     elif req.method == "POST":
         message = ""
         form = sign.GetFormDate(req,['username','password'])
-        message = sign.SignInFormCheck(form)
-        if message :
-            return render(req,'account/sign-in.html',{"form":form,'message':message})
 
         if req.POST.get('username') and req.POST.get('password'):
             users = User.objects.filter(username=form['username'])
@@ -37,14 +34,15 @@ def SignIn(req):
                 message = "User not exit!"
         return render(req,'account/sign-in.html',{"form":form,'message':message})
 
+@sign.check_parameters("POST",'account/sign-up.html','username','email','passwordAgain','password')
 def SignUp(req):
     if req.method == "GET":
         return render(req,'account/sign-up.html')
     elif req.method == "POST":
         message = ""
         form = sign.GetFormDate(req,['username','email','password','passwordAgain'])
-        message = sign.SignUpFormCheck(form)
-        if message:
+        if form['password'] != form['passwordAgain']:
+            message = 'Please enter the same Password!'
             return render(req,'account/sign-up.html',{"form":form,'message':message})
         if req.POST.get('username') and req.POST.get('email') and req.POST.get('password') and req.POST.get('passwordAgain'):
             newUser = User()
