@@ -9,6 +9,7 @@ def GetFormDate(req,dicts):
         for dic in dicts:
             form[dic] = req.POST.get(dic)
         return form
+
 def SignInFormCheck(form):
     message = ''
     if not form['username']:
